@@ -5,7 +5,9 @@ import { NewLog } from "@/components/NewLog";
 export default function Page() {
   return (
     <div>
-      <NewLog/>
+      <div className="mb-2">
+      <NewLog />
+      </div>
       <Calender/>
     </div>
   )
