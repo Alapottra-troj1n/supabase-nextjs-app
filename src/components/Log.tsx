@@ -10,23 +10,11 @@ import {
   
   const invoices = [
     {
-      invoice: "INV001",
-      paymentStatus: "Paid",
-      totalAmount: "$250.00",
-      paymentMethod: "Credit Card",
+    date: Date.now(),
+    hour: 5,
+    note: 'test'
     },
-    {
-      invoice: "INV002",
-      paymentStatus: "Pending",
-      totalAmount: "$150.00",
-      paymentMethod: "PayPal",
-    },
-    {
-      invoice: "INV003",
-      paymentStatus: "Unpaid",
-      totalAmount: "$350.00",
-      paymentMethod: "Bank Transfer",
-    },
+ 
  
   ]
   
@@ -42,11 +30,11 @@ import {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {invoices.map((invoice) => (
-            <TableRow key={invoice.invoice}>
-              <TableCell className="font-medium">{invoice.invoice}</TableCell>
-              <TableCell>{invoice.paymentStatus}</TableCell>
-              <TableCell className="text-right">{invoice.totalAmount}</TableCell>
+          {invoices.map((invoice,index) => (
+            <TableRow key={invoice.index}>
+              <TableCell className="font-medium">{invoice.date}</TableCell>
+              <TableCell>{invoice.hour}</TableCell>
+              <TableCell className="text-right">{invoice.note}</TableCell>
             </TableRow>
           ))}
         </TableBody>

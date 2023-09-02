@@ -19,7 +19,7 @@ export function DatePicker() {
   const log = useLogStore(state => state.log);
   const setDate = useLogStore(state => state.setDate);
 
-  console.log(log)
+
 
   return (
     <Popover>

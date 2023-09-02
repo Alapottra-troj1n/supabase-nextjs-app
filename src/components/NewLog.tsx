@@ -18,8 +18,22 @@ export function NewLog() {
   const log = useLogStore(state => state.log);
   const setLog = useLogStore(state => state.setLog);
 
-  console.log(log)
+  const validateLog = () => {
+    if(!log.date || !log.hour || !log.note){
+      throw "You cannot leave fields empty";
+    }else if(typeof log.hour === 'number' && log.hour >= 24){
+      throw "Enter a valid number"
+    }
+  }
 
+  const handleSubmit = () => {
+    try{
+      validateLog();
+    }catch(e){
+      console.log(e)
+    }
+
+  }
 
   return (
     <Dialog>
@@ -54,7 +68,7 @@ export function NewLog() {
           </div>
         </div>
         <DialogFooter>
-          <Button type="submit">Create</Button>
+          <Button type="submit" onClick={handleSubmit}>Create</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

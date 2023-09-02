@@ -19,6 +19,6 @@ export const useLogStore = create<LogState>()((set) => ({
         note: 'note',
         hour: 5
     },
-    setLog: (log: Log) => set((state) => ({ ...state.log, log })),
+    setLog: (log: Log) => set((state) => ({ log: { ...state.log, ...log } })),
     setDate: (date: Date) => set(state => ({ log: { ...state.log, date } }))
 }))
