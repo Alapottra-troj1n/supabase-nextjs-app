@@ -3,6 +3,7 @@ import {
     HoverCardContent,
     HoverCardTrigger,
 } from "@/components/ui/hover-card"
+import { cn } from "@/lib/utils";
 import dayjs from 'dayjs';
 
 export default function Calender() {
@@ -19,8 +20,18 @@ export default function Calender() {
         return datesArray;
     }
 
-
-
+    const getColor = (hour: number) => {
+        if (hour === 0) {
+            return 'bg-gray-200'
+        } else if (hour < 5) {
+            return 'bg-green-200'
+        } else if (hour < 10) {
+            return 'bg-green-400'
+        } else {
+            return 'bg-green-500'
+        }
+    }
+    const hour = 5;
     return (
         <div>
 
@@ -29,14 +40,13 @@ export default function Calender() {
                     return (
                         <HoverCard key={index}>
                             <HoverCardTrigger>
-                            <div className='w-5 h-5 bg-gray-200 rounded-sm cursor-pointer' key={index}>
-                            </div>
+                                <div  className={cn('w-5 h-5  rounded-sm cursor-pointer',getColor(hour || 0) )} key={index}>
+                                </div>
                             </HoverCardTrigger>
                             <HoverCardContent>
-                               0 hours on {date}
+                                {hour || 0} hours on {date}
                             </HoverCardContent>
                         </HoverCard>
-
                     )
                 })}
             </div>
