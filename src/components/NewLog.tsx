@@ -31,13 +31,22 @@ export function NewLog() {
     } else if (typeof log.hour === 'number' && log.hour >= 24) {
       throw "Enter a valid number"
     }
+  };
+
+  const closeDialog = () => {
+    document.getElementById('close-dialog-btn')?.click();
   }
 
   const handleSubmit = () => {
     try {
       validateLog();
       setLogs(log, dayjs(log.date).format('YYYY-MM-DD'));
-      
+      toast({
+        title: "Log has been added",
+        description: `${log.hour} hours have been added successfully on ${log.date}`,
+      })
+      closeDialog();
+
     } catch (e) {
       toast({
         variant: 'destructive',
