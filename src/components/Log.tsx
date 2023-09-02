@@ -31,7 +31,7 @@ import {
         </TableHeader>
         <TableBody>
           {invoices.map((invoice,index) => (
-            <TableRow key={invoice.index}>
+            <TableRow key={index}>
               <TableCell className="font-medium">{invoice.date}</TableCell>
               <TableCell>{invoice.hour}</TableCell>
               <TableCell className="text-right">{invoice.note}</TableCell>
