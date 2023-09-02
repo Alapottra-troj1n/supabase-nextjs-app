@@ -1,12 +1,12 @@
-import { Button } from "@/components/ui/button";
+import Calender from "@/components/Calender";
+import { NewLog } from "@/components/NewLog";
+
 
 export default function Page() {
   return (
     <div>
-      <div>
-        This is a test page
-      </div>
-      <Button variant={"outline"} size={"lg"}>Hello</Button>
+      <NewLog/>
+      <Calender/>
     </div>
   )
 }
