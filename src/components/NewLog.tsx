@@ -13,27 +13,41 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { DatePicker } from "./DatePicker"
 import { useLogStore } from "@/store"
+import { useToast } from "./ui/use-toast"
+import dayjs from "dayjs"
+
 
 export function NewLog() {
   const log = useLogStore(state => state.log);
   const setLog = useLogStore(state => state.setLog);
+  const setLogs = useLogStore(state => state.setLogs);
+  const logs = useLogStore(state => state.logs);
+
+  const { toast } = useToast();
 
   const validateLog = () => {
-    if(!log.date || !log.hour || !log.note){
+    if (!log.date || !log.hour || !log.note) {
       throw "You cannot leave fields empty";
-    }else if(typeof log.hour === 'number' && log.hour >= 24){
+    } else if (typeof log.hour === 'number' && log.hour >= 24) {
       throw "Enter a valid number"
     }
   }
 
   const handleSubmit = () => {
-    try{
+    try {
       validateLog();
-    }catch(e){
-      console.log(e)
+      setLogs(log, dayjs(log.date).format('YYYY-MM-DD'));
+      
+    } catch (e) {
+      toast({
+        variant: 'destructive',
+        title: "Something went wrong",
+        description: e as String,
+      })
     }
 
   }
+  console.log(logs);
 
   return (
     <Dialog>
@@ -52,19 +66,19 @@ export function NewLog() {
             <Label htmlFor="date" className="text-right">
               Date
             </Label>
-            <DatePicker/>
+            <DatePicker />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="hour" className="text-right">
               Hour
             </Label>
-            <Input type="number" id="hour" value={log.hour.toString()} onChange={(e)=> setLog({...log, hour: parseInt(e.target.value)})} className="col-span-3" />
+            <Input type="number" id="hour" value={log.hour.toString()} onChange={(e) => setLog({ ...log, hour: parseInt(e.target.value) })} className="col-span-3" />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="note" className="text-right">
               Note
             </Label>
-            <Input id="note" className="col-span-3" value={log.note.toString()} onChange={(e)=> setLog({...log, note: e.target.value})} />
+            <Input id="note" className="col-span-3" value={log.note.toString()} onChange={(e) => setLog({ ...log, note: e.target.value })} />
           </div>
         </div>
         <DialogFooter>
