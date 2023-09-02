@@ -2,8 +2,8 @@ import { create } from 'zustand'
 
 type Log = {
     date: Date,
-    note: String,
-    hour: Number
+    note: string,
+    hour: number
 }
 
 interface LogState {

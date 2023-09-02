@@ -1,12 +1,17 @@
+'use client';
+
 import {
     HoverCard,
     HoverCardContent,
     HoverCardTrigger,
 } from "@/components/ui/hover-card"
 import { cn } from "@/lib/utils";
+import { useLogStore } from "@/store";
 import dayjs from 'dayjs';
 
 export default function Calender() {
+    const logs = useLogStore(state => state.logs);
+
 
     const getDateInMonths = (year = dayjs().year(), month = dayjs().month()) => {
 
@@ -37,14 +42,15 @@ export default function Calender() {
 
             <div className='flex flex-wrap gap-2 border border-dashed p-10 justify-center rounded-md '>
                 {getDateInMonths().map((date, index) => {
+                    const log = logs[date];
                     return (
                         <HoverCard key={index}>
                             <HoverCardTrigger>
-                                <div  className={cn('w-5 h-5  rounded-sm cursor-pointer',getColor(hour || 0) )} key={index}>
+                                <div className={cn('w-5 h-5  rounded-sm cursor-pointer', getColor(log?.hour || 0))} key={index}>
                                 </div>
                             </HoverCardTrigger>
                             <HoverCardContent>
-                                {hour || 0} hours on {date}
+                                {log?.hour || 0} hours on {date}
                             </HoverCardContent>
                         </HoverCard>
                     )
