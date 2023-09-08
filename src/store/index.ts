@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 
-type Log = {
-    date: Date,
+export type Log = {
+    date: Date | string,
     note: string,
     hour: number
 }
@@ -27,4 +27,5 @@ export const useLogStore = create<LogState>()((set) => ({
     setLog: (log: Log) => set((state) => ({ log: { ...state.log, ...log } })),
     setDate: (date: Date) => set(state => ({ log: { ...state.log, date } })),
     setLogs: (log: Log, key: string) => set(state => ({ logs: { ...state.logs, [key]: log } }))
-}))
+}));
+
